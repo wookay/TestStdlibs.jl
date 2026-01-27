@@ -1,7 +1,7 @@
 module test_dates_parse
 
 using Test
-using Dates # DateTime DateFormat DatePeriod TimePeriod year month day hour minute second
+using Dates
 
 const RFC3339 = DateFormat("yyyy-mm-dd\\THH:MM:SSZ")
 
@@ -28,5 +28,17 @@ dt = parse(DateTime, created_at, RFC3339)
 @test Date(1) == Date(1, 1, 1)
 @test Time(0) == Time(0, 0, 0)
 @test Time(1) == Time(1, 0, 0)
+
+@test DateTime("2019-03-22 12:01 AM", dateformat"yyyy-mm-dd II:MM p") < DateTime("2019-03-22 01:01 AM", dateformat"yyyy-mm-dd II:MM p")
+
+df = DateFormat("u dd, yyyy HH:MM:SS p")
+
+dt = parse(DateTime, "Dec 20, 2019 6:37:10 AM", df)
+@test dt == DateTime(2019, 12, 20, 6, 37, 10)
+
+dt = parse(DateTime, "Dec 20, 2019 6:37:10 PM", df)
+@test dt == DateTime(2019, 12, 20, 18, 37, 10)
+
+@test Dates.format(Time(Nanosecond(Minute(62))), "HH:MM") == "01:02"
 
 end # module test_dates_parse
