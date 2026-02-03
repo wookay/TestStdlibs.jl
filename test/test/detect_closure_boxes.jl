@@ -1,0 +1,8 @@
+module test_Test_detect_closure_boxes
+
+using Test
+
+Test.detect_closure_boxes
+Test.detect_closure_boxes_all_modules
+
+end # module test_Test_detect_closure_boxes

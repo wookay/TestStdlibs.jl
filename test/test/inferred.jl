@@ -1,4 +1,4 @@
-module test_test_inferred
+module test_Test_inferred
 
 using Test # @test @inferred
 
@@ -17,4 +17,4 @@ end
 
 @test length(GenericString("a")) == 1
 
-end # module test_test_inferred
+end # module test_Test_inferred

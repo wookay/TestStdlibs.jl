@@ -17,4 +17,6 @@ if VERSION >= v"1.7"
     @test deps[pkgid_test.uuid].version >= v"1.11"
 end
 
+@test Pkg.Types.is_stdlib(Base.UUID("3fa0cd96-eef1-5676-8a61-b3b8758bbffb"), VERSION)
+
 end # module test_pkg_pkg_id
