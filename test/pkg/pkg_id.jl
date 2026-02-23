@@ -17,6 +17,14 @@ if VERSION >= v"1.7"
     @test deps[pkgid_test.uuid].version >= v"1.11"
 end
 
-@test Pkg.Types.is_stdlib(Base.UUID("3fa0cd96-eef1-5676-8a61-b3b8758bbffb"), VERSION)
+uuid_repl = Base.UUID("3fa0cd96-eef1-5676-8a61-b3b8758bbffb")
+@test Pkg.Types.is_stdlib(uuid_repl, VERSION)
+pkgid_repl = Base.PkgId(uuid_repl, "REPL")
+@test Base.is_stdlib(pkgid_repl)
+
+pkgid_core = Base.PkgId(nothing, "Core")
+pkgid_base = Base.PkgId(nothing, "Base")
+pkgid_main = Base.PkgId(nothing, "Main")
+@test [pkgid_core, pkgid_base, pkgid_main] ⊆ Base._sysimage_modules
 
 end # module test_pkg_pkg_id
