@@ -11,7 +11,7 @@ foo() = 42
 data = Profile.fetch()
 if isempty(data)
 else
-    Profile.print(stdout, data; format = :flat, groupby = :thread)
+    Profile.print(devnull, data; format = :flat, groupby = :thread)
     Profile.clear()
 end
 
