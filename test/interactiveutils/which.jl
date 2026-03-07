@@ -5,7 +5,8 @@ using InteractiveUtils
 
 @test @which(+) === Base
 
-meth = @which(1+2)
-@test meth.file === Symbol("int.jl")
+meth = @which(2pi)
+@test meth isa Method
+@test meth.file === Symbol("promotion.jl")
 
 end # module test_interactiveutils_which
