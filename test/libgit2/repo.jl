@@ -26,10 +26,11 @@ function test_repo(repo::GitRepo)
     blob::GitBlob = GitBlob(tree_entry)
     @test contains(LibGit2.content(blob), "Build Status")
 
-    st = LibGit2.status(repo, "test/libgit2/fetch.jl")
+    path = "test/libgit2/fetch.jl"
+    st = LibGit2.status(repo, path)
     @test st == LibGit2.Consts.STATUS_CURRENT
 
-    blame::GitBlame = GitBlame(repo, "test/libgit2/fetch.jl")
+    blame::GitBlame = GitBlame(repo, path)
     @test LibGit2.counthunks(blame) == 1
 
     blame_hunk::BlameHunk = blame[1]
@@ -43,5 +44,23 @@ try
 catch e
     @info :error e  # LibGit2.GitError
 end
+
+# from julia/stdlib/LibGit2/src/consts.jl
+#=
+const STATUS_CURRENT          = Cuint(0)
+const STATUS_INDEX_NEW        = Cuint(1 << 0)
+const STATUS_INDEX_MODIFIED   = Cuint(1 << 1)
+const STATUS_INDEX_DELETED    = Cuint(1 << 2)
+const STATUS_INDEX_RENAMED    = Cuint(1 << 3)
+const STATUS_INDEX_TYPECHANGE = Cuint(1 << 4)
+const STATUS_WT_NEW           = Cuint(1 << 7)
+const STATUS_WT_MODIFIED      = Cuint(1 << 8)
+const STATUS_WT_DELETED       = Cuint(1 << 9)
+const STATUS_WT_TYPECHANGE    = Cuint(1 << 10)
+const STATUS_WT_RENAMED       = Cuint(1 << 11)
+const STATUS_WT_UNREADABLE    = Cuint(1 << 12)
+const STATUS_IGNORED          = Cuint(1 << 14)
+const STATUS_CONFLICTED       = Cuint(1 << 15)
+=#
 
 end # module test_libgit2_repo
