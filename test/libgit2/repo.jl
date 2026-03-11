@@ -26,6 +26,9 @@ function test_repo(repo::GitRepo)
     blob::GitBlob = GitBlob(tree_entry)
     @test contains(LibGit2.content(blob), "Build Status")
 
+    st = LibGit2.status(repo, "test/libgit2/fetch.jl")
+    @test st == LibGit2.Consts.STATUS_CURRENT
+
     blame::GitBlame = GitBlame(repo, "test/libgit2/fetch.jl")
     @test LibGit2.counthunks(blame) == 1
 
