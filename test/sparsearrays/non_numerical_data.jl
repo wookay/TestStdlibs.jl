@@ -1,8 +1,8 @@
 module test_sparsearrays_non_numerical_data
 
 using Test
-using TestStdlibs # precompile SparseArrays.sparse(::Vector{String}) in ext/SparseArraysExt.jl
-using SparseArrays
+using TestStdlibs ### trigger SparseArraysExt SparseArrays.sparsevec(::Vector{String})
+using SparseArrays: sparse
 
 Base.zero(s::String)  = ""
 A = sparse(["a", "b"])

@@ -1,8 +1,11 @@
 module SparseArraysExt
 
-using SparseArrays
+using SparseArrays: SparseArrays, SparseVector
 
-### how stop it recompile
-#=   31.1 ms =# precompile(Tuple{typeof(SparseArrays.sparse), Array{String, 1}}) # recompile
+import .SparseArrays: sparsevec
+function sparsevec(x::Vector{String})
+    len = length(x)
+    SparseVector(len, collect(1:len), x)
+end
 
 end # module SparseArraysExt
