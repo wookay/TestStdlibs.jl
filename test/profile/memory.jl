@@ -7,7 +7,7 @@ foo() = 42
 Profile.Allocs.@profile sample_rate=0.1 foo()
 
 results = Profile.Allocs.fetch()
-Profile.Allocs.print(devnull, results; format = :flat, groupby = :thread)
+Profile.Allocs.print(devnull, results)
 Profile.Allocs.clear()
 
 # Memory profiling
